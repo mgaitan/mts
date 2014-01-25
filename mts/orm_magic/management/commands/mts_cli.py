@@ -15,7 +15,7 @@ def get_numbers(s):
 
 def urlretrieve(url):
     r = requests.get(url)
-    filename = tempfile.mkstemp(suffix='.srt')
+    _, filename = tempfile.mkstemp(suffix='.srt')
     with open(filename, 'wb') as f:
         f.write(r.content)
     return filename
