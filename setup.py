@@ -21,7 +21,7 @@ setup(
     ],
     package_dir={'mts': 'mts'},
     include_package_data=True,
-    install_requires=['django', 'request'],
+    install_requires=['django', 'requests'],
     license="BSD",
     zip_safe=False,
     keywords='mts',
