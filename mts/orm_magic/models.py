@@ -54,7 +54,7 @@ class Episode(models.Model):
         return self.title
 
     def __repr__(self):
-        return '<%s: %s %s>' % (self.show, self, self.number)
+        return '<%s %s: %s>' % (self.show, self.number, self)
 
     @property
     def number(self):
@@ -64,7 +64,7 @@ class Episode(models.Model):
     def video(self):
         try:
             source = self.source_set.filter(host='pinit')[0]
-        except Source.DoesNotExist:
+        except IndexError:
             return
         response = requests.get('http://www.pinit.tv/player/vConfig_embed_new.php?vkey=%s' % source.key)
         return re.findall(r'.*\<location\>(.*)\</location\>.*', response.content, re.MULTILINE)[0]

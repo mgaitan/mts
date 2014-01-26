@@ -21,7 +21,7 @@ setup(
     ],
     package_dir={'mts': 'mts'},
     include_package_data=True,
-    install_requires=['django', 'requests'],
+    install_requires=['django', 'requests', 'docopt'],
     license="BSD",
     zip_safe=False,
     keywords='mts',
@@ -39,7 +39,7 @@ setup(
     test_suite='tests',
     entry_points = {
         'console_scripts': [
-            'mts = mts:shell',
+            'mts = mts:main',
             ]
         }
 

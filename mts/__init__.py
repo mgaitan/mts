@@ -1,8 +1,5 @@
 
-def shell():
-    import os, sys
+from mts.cli import main as main_cli
 
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "mts.settings")
-
-    from django.core.management import call_command
-    call_command('mts_cli', *sys.argv)
+def main():
+    main_cli()
