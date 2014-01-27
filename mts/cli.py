@@ -75,22 +75,27 @@ def main():
 
     for i, episode in enumerate(show.episode_set.filter(season=season,
                                            episode__gte=episode_number)):
-        if args['--info'] and i == 0:
-            title = repr(episode)[1:-1]
-            print(title)
-            print('-' * len(title))
-            print('')
-            print(episode.overview)
-            return
 
-        print("Retrieving %s %s..." % (show, episode.number))
-        if not episode.video:
-            sys.exit('No pinit source for this episode')
+        try:
+            if args['--info'] and i == 0:
+                title = repr(episode)[1:-1]
+                print(title)
+                print('-' * len(title))
+                print('')
+                print(episode.overview)
+                return
 
-        subs = urlretrieve(episode.subtitle)
+            print("Retrieving %s %s..." % (show, episode.number))
+            if not episode.video:
+                sys.exit('No pinit source for this episode')
 
-        arguments = ['mplayer', '-fs', episode.video, '-sub', subs]
-        subprocess.call(arguments)
+            subs = urlretrieve(episode.subtitle)
+
+            arguments = ['mplayer', '-fs', episode.video, '-sub', subs]
+            subprocess.call(arguments)
+        except KeyboardInterrupt:
+            sys.exit('Ok\. See you!')
+
 
 
 

@@ -54,7 +54,7 @@ class Episode(models.Model):
         return self.title
 
     def __repr__(self):
-        return '<%s %s: %s>' % (self.show, self.number, self)
+        return '<%s %s "%s">' % (self.show, self.number, self)
 
     @property
     def number(self):
