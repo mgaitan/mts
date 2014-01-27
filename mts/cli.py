@@ -28,6 +28,10 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "mts.settings")
 import re
 import subprocess
 import tempfile
+from ConfigParser import SafeConfigParser
+
+APP_DATA_DIR = os.path.join(os.path.expanduser("~"), '.mts')
+CONFIG_FILE = os.path.join(APP_DATA_DIR, 'config.ini')
 
 import requests
 from docopt import docopt
@@ -59,8 +63,8 @@ def main():
             print(s)
         return
 
-    show = Show.objects.filter(title__icontains=args['<show>'])
 
+    show = Show.objects.filter(title__icontains=args['<show>'])
 
     if show.count() == 0:
         sys.exit('Show not found')
@@ -69,7 +73,7 @@ def main():
         sys.exit('Show name is ambiguos: \n\n%s' % multi)
 
     show = show[0]
-
+    player = get_config().get('main', 'player')
     season, episode_number = get_numbers(args['<start>'])
 
 
@@ -91,12 +95,39 @@ def main():
 
             subs = urlretrieve(episode.subtitle)
 
-            arguments = ['mplayer', '-fs', episode.video, '-sub', subs]
+
+            arguments = player.replace('{episode}', episode.video).\
+                               replace('{subs}', subs).split()
             subprocess.call(arguments)
         except KeyboardInterrupt:
             sys.exit('Ok\. See you!')
 
 
+def get_config():
+
+    DEFAULTS = { 'main': {
+                    "player": "mplayer -fs {episode} -sub {subs}",
+                    },
+                }
+
+    config = SafeConfigParser()
+    if not os.path.exists(CONFIG_FILE):
+        print "There is no config file. Creating default in %s" % CONFIG_FILE
+        for section, options in DEFAULTS.items():
+            for section, options in DEFAULTS.items():
+                if not config.has_section(section):
+                    config.add_section(section)
+                for option, value in options.items():
+                    config.set(section, option, value)
+
+        if not os.path.exists(APP_DATA_DIR):
+            os.makedirs(APP_DATA_DIR)   #make .mts dir
+        with open(CONFIG_FILE, 'w') as cfg:
+            config.write(cfg)
+    else:
+        with open(CONFIG_FILE, 'r') as cfg:
+            config.readfp(cfg)
+    return config
 
 
 if __name__ == '__main__':
