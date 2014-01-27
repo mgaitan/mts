@@ -8,7 +8,7 @@ mts, miratuserie.tv on the command line
 
 .. attention::
 
-    At this moment, only episodes having a source in Pinit.tv could be player.
+    At this moment, only episodes having a source in Pinit.tv could be played.
 
 
 Install

@@ -10,8 +10,8 @@ history = open('HISTORY.rst').read().replace('.. :changelog:', '')
 
 setup(
     name='mts',
-    version='0.1.0',
-    description='Miratusseries.com on the command line',
+    version='0.1.2',
+    description='Miratuserie.tv on the command line',
     long_description=readme + '\n\n' + history,
     author='Martín Gaitán',
     author_email='gaitan@gmail.com',
