@@ -58,16 +58,17 @@ By default, ``mts`` tries to use ``mplayer`` in full-screen,
 with this config file::
 
     [main]
-    player = mplayer -fs {episode} -sub {subs}
+    player = mplayer -fs {episode} [-sub {subs}]
 
+
+The substring between ``[]`` is used only if the ``-ns`` (no subtitles) flag isn't present in the command line
 
 For example, if you want to use ``vlc``, something like this should work::
 
     [main]
-    player = vlc -f {episode} :sub-file={subs}
+    player = vlc -f {episode} [:sub-file={subs}]
 
 you got the idea.
-
 
 
 

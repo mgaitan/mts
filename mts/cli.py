@@ -15,7 +15,7 @@ Arguments:
 optional arguments:
   -i, --info            Show info about available shows and episodes
   -h, --help            Show this help message and exit
-  -ns, --no_subtitle    Don't download subtitles (TO DO)
+  -n, --no-subtitles    Don't download subtitles
   -d, --download        Download the episode instead play it (TO DO)
 """
 
@@ -93,20 +93,29 @@ def main():
             if not episode.video:
                 sys.exit('No pinit source for this episode')
 
-            subs = urlretrieve(episode.subtitle)
 
+            arguments = player.replace('{episode}', episode.video)
 
-            arguments = player.replace('{episode}', episode.video).\
-                               replace('{subs}', subs).split()
-            subprocess.call(arguments)
+            subs_pattern = re.findall('.*(\[(.*\{subs\})\]).*',
+                                      arguments)
+
+            if args['--no-subtitles'] and subs_pattern:
+
+                arguments = arguments.replace(subs_pattern[0][0], '')
+            elif subs_pattern:
+                subs = urlretrieve(episode.subtitle)
+                arguments = arguments.replace(*subs_pattern[0]).replace('{subs}', subs)
+
+            subprocess.call(arguments.split())
+
         except KeyboardInterrupt:
-            sys.exit('Ok\. See you!')
+            sys.exit('\nSee you!')
 
 
 def get_config():
 
     DEFAULTS = { 'main': {
-                    "player": "mplayer -fs {episode} -sub {subs}",
+                    "player": "mplayer -fs {episode} [-sub {subs}]",
                     },
                 }
 
