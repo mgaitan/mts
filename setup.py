@@ -10,14 +10,14 @@ history = open('HISTORY.rst').read().replace('.. :changelog:', '')
 
 setup(
     name='mts',
-    version='0.2',
+    version='0.2.1',
     description='Miratuserie.tv on the command line',
     long_description=readme + '\n\n' + history,
     author='Martín Gaitán',
     author_email='gaitan@gmail.com',
     url='https://github.com/mgaitan/mts',
     packages=[
-        'mts',
+        'mts', 'mts/orm_magic'
     ],
     package_dir={'mts': 'mts'},
     include_package_data=True,
