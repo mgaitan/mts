@@ -1,6 +1,7 @@
 import re
 import requests
 from django.db import models
+from hosts import pinit, uptobox
 
 
 class Show(models.Model):
@@ -62,12 +63,7 @@ class Episode(models.Model):
 
     @property
     def video(self):
-        try:
-            source = self.source_set.filter(host='pinit')[0]
-        except IndexError:
-            return
-        response = requests.get('http://www.pinit.tv/player/vConfig_embed_new.php?vkey=%s' % source.key)
-        return re.findall(r'.*\<location\>(.*)\</location\>.*', response.content, re.MULTILINE)[0]
+        return pinit(self) or uptobox(self)
 
 
 class Source(models.Model):

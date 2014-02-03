@@ -90,11 +90,13 @@ def main():
                 return
 
             print("Retrieving %s %s..." % (show, episode.number))
-            if not episode.video:
-                sys.exit('No pinit source for this episode')
+
+            video = episode.video
+            if not video:
+                sys.exit('No know source available for this episode')
 
 
-            arguments = player.replace('{episode}', episode.video)
+            arguments = player.replace('{episode}', video)
 
             subs_pattern = re.findall('.*(\[(.*\{subs\})\]).*',
                                       arguments)
