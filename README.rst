@@ -3,12 +3,22 @@
 mts, miratuserie.tv on the command line
 ===========================================
 
+
+.. image:: https://pypip.in/v/mts/badge.png
+   :target: https://pypi.python.org/pypi/mts
+   :alt: Latest PyPI version
+
+.. image:: https://pypip.in/d/mts/badge.png
+   :target: https://pypi.python.org/pypi/mts
+   :alt: Number of PyPI downloads
+
+
 `miratuserie.tv <http://miratuserie.tv>`_ is a site to stream tv shows with spanish subtitles. ``mts`` do the same, but in a geek (yonkie) way.
 
 
 .. attention::
 
-    At this moment, only episodes having a source in Pinit.tv could be played.
+    At this moment, only episodes having a source in Pinit.tv or uptobox.com could be played.
 
 
 Install
