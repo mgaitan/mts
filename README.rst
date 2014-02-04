@@ -1,4 +1,3 @@
-
 ===========================================
 mts, miratuserie.tv on the command line
 ===========================================
@@ -54,7 +53,7 @@ The complete inline help looks like this::
     optional arguments:
       -i, --info            Show info about available shows and episodes
       -h, --help            Show this help message and exit
-      -ns, --no_subtitle    Don't download subtitles (TO DO)
+      -n, --no_subtitle     Don't download subtitles
       -d, --download        Download the episode instead play it (TO DO)
 
 
@@ -71,7 +70,7 @@ with this config file::
     player = mplayer -fs {episode} [-sub {subs}]
 
 
-The substring between ``[]`` is used only if the ``-ns`` (no subtitles) flag isn't present in the command line
+The substring between ``[]`` is used only if the ``-n`` (no subtitles) flag isn't present in the command line
 
 For example, if you want to use ``vlc``, something like this should work::
 
