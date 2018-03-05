@@ -3,11 +3,11 @@ mts, miratuserie.tv on the command line
 ===========================================
 
 
-.. image:: https://pypip.in/v/mts/badge.png
+.. image:: https://img.shields.io/pypi/v/mts.svg
    :target: https://pypi.python.org/pypi/mts
    :alt: Latest PyPI version
 
-.. image:: https://pypip.in/d/mts/badge.png
+.. image:: https://img.shields.io/pypi/dm/mts.svg
    :target: https://pypi.python.org/pypi/mts
    :alt: Number of PyPI downloads
 
